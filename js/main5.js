@@ -1,4 +1,5 @@
 document.querySelector("#createroom").onclick = function(){
+    var d= new Date();
 let name1,title,address,quantity,phone,remarks="";    
 vali();
             function vali(){
@@ -10,7 +11,7 @@ vali();
                 remark = document.querySelector('#remarks').value;
                 if(name1!=null && title!=null && quantity!=null && address!=null && phone!=null){
                 var user = firebase.auth().currentUser;
-         var tgref=firebase.database().ref('firebase.database().ref(`${sessionStorage.getItem("vemkey")}/${document.getElementById("title").value}`);');
+         var tgref=firebase.database().ref(`${user.uid}/${document.getElementById("title").value}`);
     var data={
         "name":name1,
         "title":title,
@@ -18,10 +19,10 @@ vali();
         "quantity":quantity,
         "phone":phone,
         "remark":remark,
+         "time":d,
          }
      tgref.set(data).then(function(){
-            // window.location.href="customer.html#order";
-            console.log("hey");   
+             window.location.href="customer.html#order";  
     });
   
      }

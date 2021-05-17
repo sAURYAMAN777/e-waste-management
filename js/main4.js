@@ -9,3 +9,64 @@ var config = {
    };
    // Initialize Firebase
    firebase.initializeApp(config);
+   var i=0;
+   var user= firebase.auth().currentUser;
+   console.log(user);
+   var hjcordiref= firebase.database().ref(`${sessionStorage.getItem("uids")}`);
+    hjcordiref.orderByChild('title').on("child_added", function(data){
+         var newVoke = data.val();
+        console.log(data.val());
+        if(newVoke.title){
+        var uri=`https://sauryaman777.github.io/e-waste-management/studass.html?uid=${sessionStorage.getItem("uids")}&title=${newVoke.title}`;
+        var res=encodeURI(uri);
+        var time=newVoke.time;
+        if(!time)
+        time= new Date();
+        var html = "";
+         html +=`<div class="col-lg-4 col-sm-12 mt-4 overlay" style="padding:15px;">
+          <div class="row">
+            <div class="col-6">
+              <div class="info" style="display: flex; justify-content: center;align-items: center;flex-direction: column;padding: 9px;">
+                <p class="ptitle">${newVoke.title}</p>
+                <p class="ptime">${time}</p>
+              </div>
+            </div>
+            <div class="col-6" style="display:flex;align-items: center; justify-content: center;">
+            <img src="images/e-waste-management.jpg" class="img-fluid" style="postion:absolute;top:0%;right:0%;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="display: flex;flex-wrap:wrap;align-items:center;justify-center: center;">
+              <center><a href="vieworders.html"><button type="button" class="btn btn-success">View Details<i class="fas fa-angle-right"></i></button></a></center>
+            </div>
+          </div>
+         
+<br>
+     </div>
+`
+         document.getElementById("classe").innerHTML += html;
+        }
+    });
+
+var us=document.getElementById("user");
+document.getElementById("create").addEventListener("click",cretef);
+function cretef(){
+   
+    window.open('createorder.html','_self');
+
+}
+
+document.getElementById("log").addEventListener("click",logo);
+function logo(){
+   
+    firebase.auth().signOut();
+
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+
+  if(!user){
+
+      window.open('index1.html','_self');
+  }     
+});

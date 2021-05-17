@@ -45,8 +45,8 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrillto" href="#order"><span>Order pickup</span></a></li>
+          <li><a class="nav-link scrollto" href="#order"><span>Order pickup</span></a></li>
+          <li><a class="nav-link scrollto" href="marketplace.html"><span>Marketplace</span></a></li>
           <li><a class="nav-link scrollto" href="#features">Services</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Bill pay</a></li>
@@ -799,74 +799,9 @@
     }
     </script>
             
-             <script src="js/main4.js"></script>
-             <script>
-               var i=0;
-
-var hjcordiref= firebase.database().ref(`${sessionStorage.getItem("uids")}`);
-     hjcordiref.orderByChild('title').on("child_added", function(data){
-          var newVoke = data.val();
-         console.log(data.val());
-         if(newVoke.title){
-         var uri=`https://patelaryan7751.github.io/DSC-WOW_CAPITAL-E/studass.html?uid=${sessionStorage.getItem("uids")}&title=${newVoke.title}`;
-         var res=encodeURI(uri);
-         i=i+1;
-         var html = "";
-          html +=`<div class="col-lg-4 col-sm-12 mt-4" style="padding:15px;">
-      
-<div class="card-body"  style="background-color: aliceblue;border-radius:5px;display:flex;flex-direction:column;width:100%;align-items:center;justify-content:center;">
-
-        <h5 class="card-field card-title" style="font-weight:700;color:blue">${newVoke.title}</h5>
-        <div class="new-image" style="display:flex;width:100%;align-items:center;justify-content:center;padding:4px;margin-bottom:3px;">
-          <img src="images/e-waste-management.jpg" class="img-fluid" width="30px" height="25px" style="postion:absolute;top:0%;right:0%;">  
-        </div>
-
-        <div class="tooltip1">
-<button data-id="${i}" onclick="myFunction(this)" onmouseout="outFunc(this)" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-  <span class="tooltiptext" id="myTooltip${i}">View details</span>
-  View
-  </button>
-</div>
-
-</div> 
-          
-<br>
-      </div>
-`
-          document.getElementById("classe").innerHTML += html;
-         }
-     });
-//      <input type="text" value="${res}" 
-// id="myInput${i}">
-var us=document.getElementById("user");
-document.getElementById("create").addEventListener("click",cretef);
-function cretef(){
-    
-     window.open('createorder.html','_self');
-
-}
-
-document.getElementById("log").addEventListener("click",logo);
-function logo(){
-    
-     firebase.auth().signOut();
-
-}
-
-
-firebase.auth().onAuthStateChanged(function(user) {
- 
- 
-   if(!user){
-
-       window.open('index1.html','_self');
-   } 
-   
-    
-});
-
-             </script>
-             <script src="js/js2/main.js"></script>
+    <script src="js/main4.js"></script>
+             
+<script src="js/js2/main.js"></script>
 <script src="js/contact.js"></script>
 </body>
 

@@ -141,6 +141,31 @@ h1, h2, h3, h4, h5, h6 {
 .query-bot:hover {
   background-color: crimson;
 }
+.overlay {
+  padding: 21px;
+  background-color:#DCDCDC;
+  border-radius: 5px;
+  transition: 0.4s ease;
+  margin: 5px 20px;
+}
+.overlay:hover {
+  transform: translateY(-6px);
+  box-shadow:5px 5px 15px 4px rgba(13, 215, 241, 0.8);
+}
+.overlay img {
+  width: 120px;
+  height: auto;
+  border-radius: 5px;
+}
+.info .ptitle {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  color: #000;
+}
+.info .ptime {
+  color: black;
+  font-size: 0.8em;
+}
 /*--------------------------------------------------------------
 # Disable AOS delay on mobile
 --------------------------------------------------------------*/
