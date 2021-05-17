@@ -106,6 +106,41 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
+.back-to-topq {
+  position: fixed;
+  right: 15px;
+  bottom: 65px;
+  z-index: 996;
+  background-color: #6c757d;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.back-to-topq i {
+  font-size: 28px;
+  color: #000;
+  line-height: 0;
+}
+
+.back-to-topq:hover {
+  background: #2be4a2;
+  color: #000;
+}
+
+.query-bot {
+  background-color: darkblue;
+  transition: 0.3s ease;
+  color: #ebebff;
+  height: 60px;
+  width: 110px;
+  border: none;
+  margin: 40px 10px 20px 10px;
+}
+.query-bot:hover {
+  background-color: crimson;
+}
 /*--------------------------------------------------------------
 # Disable AOS delay on mobile
 --------------------------------------------------------------*/

@@ -4,19 +4,17 @@
 		<meta charset="utf-8">
 		<title>Create order</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<!-- MATERIAL DESIGN ICONIC FONT -->
-		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 		
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="contact ui/css/style.css">
+		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	</head>
 
 	<body>
 
 		<div class="wrapper">
 			<div class="inner">
-				<form action="">
+				<form onsubmit="return vali()">
 					<h3>Make Your Order</h3>
 					<p>Please fill up the details carefully and correctly so that we can make your work easier</p>
 					<label class="form-group">
@@ -49,17 +47,20 @@
 						<span for="">Any remarks</span>
 						<span class="border"></span>
 					</label>
-					<button id="createroom">Submit 
-						<i class="zmdi zmdi-arrow-right"></i>
-					</button>
+					
 				</form>
+				<button type="button" id="createroom">
+					Submit
+				</button>
 			</div>
 		</div>
-		
+		<a href="query.html" title="query chat bot" class="back-to-topq query-btn"><i class="fa fa-question"></i></a>
+
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="js/config.js"></script>
 	<script src="js/main5.js"></script>
 	</body>

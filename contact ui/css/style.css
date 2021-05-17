@@ -27,7 +27,34 @@ a:hover {
 
 :focus {
   outline: none; }
-
+  
+  .back-to-topq {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    z-index: 996;
+    background-color: #6c757d;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    transition: all 0.4s;
+  }
+  
+  .back-to-topq i {
+    font-size: 28px;
+    color: #000;
+    line-height: 0;
+  }
+  
+  .back-to-topq:hover {
+    background: #2be4a2;
+    color: #000;
+  }
+  .query-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 .wrapper {
   min-height: 100vh;
   display: flex;
@@ -105,7 +132,7 @@ textarea.form-control {
   padding-top: 10px;
   padding-bottom: 10px; }
 
-button {
+  button {
   border: none;
   width: 162px;
   height: 51px;
@@ -137,7 +164,7 @@ button {
     transition-property: transform;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out; }
-  button:before {
+    button:before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -158,7 +185,7 @@ button {
     transition-timing-function: ease-out; }
   button:hover {
     border-color: transparent; }
-    button:hover:before {
+    button:hover::before {
       -webkit-transform: scaleX(1);
       transform: scaleX(1); }
     button:hover i {

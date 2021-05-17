@@ -106,6 +106,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     else{
         var pq=document.getElementById("loadar");
     pq.style.display="none";
-    window.open('signup.html','_self');
+    window.open('index1.html','_self');
     }
 });
