@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6" style="background-color: #6c757d;padding: 20px;display: flex;flex-direction: column;
                 flex-wrap: wrap;justify-content: center;align-items: center;border-radius: 10px;">
-                    <form onsubmit="submitPhoneNumberAuth()">
+                    <form>
                         <input type="number" id="debit-no" placeholder="Enter Debit card Number" required>:<label for="debit-no"> Debit Card Number</label>
                         <input type="text" id="acc-name" placeholder="Enter name of account holder" required>:<label for="acc-name"> Account Holder's Name</label>
                         <input type="date" id="expiry" required>:<label for="expiry">The expiry date of debit card</label>
@@ -41,10 +41,11 @@
                         <input type="tel" id="phoneNumber" required>:<label for="phoneNumber">Valid Phone Number</label>
                         <!-- Add a container for reCaptcha -->
                         <div id="recaptcha-container"></div>
-                        <center><button type="submit" id="sign-in-button">
-                            GET OTP
-                          </button></center>
+                        
                     </form>
+                    <center><button type="submit" id="sign-in-button" onclick="submitPhoneNumberAuth()">
+                      GET OTP
+                    </button></center>
                     <div class="amount" style="padding: 10px 10px 7px 10px;background-color: antiquewhite;border-radius: 5px;margin-bottom: 6px;">
                         <p style="font-family: hel;font-weight: 600;">Money to be withdrawn :&nbsp;<span id="amt"></span></p>
                     </div>
