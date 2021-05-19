@@ -71,6 +71,7 @@ document.querySelector('#btn-signup').onclick = function(){
         college: city,
         role: interests,
         name: name,
+        type:"regular",
         email:localStorage.getItem("vmkey")
  }
      kpliref.push(data).then(function() {

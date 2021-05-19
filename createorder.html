@@ -7,7 +7,7 @@
 		
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="contact ui/css/style.css">
-		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -53,9 +53,16 @@
 					
 					<label class="form-group"style="display: none;" id="desc">
 						<input type="text" id="desci" class="form-control">
-						<span for="">Describe the item you want to sell</span>
+						<span for="">What item do you want to sell?</span>
 						<span class="border"></span>
 					</label>
+
+					<label class="form-group"style="display: none;" id="describe">
+						<textarea id="desciribee" class="form-control"></textarea>
+						<span for="">Give a brief decription of the item you want to sell</span>
+						<span class="border"></span>
+					</label>
+
 					<label class="form-group">
 						<input id="phone" type="number" class="form-control"  required>
 						<span for="">Phone</span>
@@ -103,8 +110,10 @@ function myFunction2() {
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
     document.getElementById("desc").style.display = "block";
+	document.getElementById("describe").style.display = "block";
   } else {
     document.getElementById("desc").style.display = "none";
+	document.getElementById("describe").style.display = "none";
   }
 }
 </script>

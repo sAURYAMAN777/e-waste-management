@@ -133,9 +133,8 @@
           .then(function(result) {
             var user = result.user;
             console.log(user);
-            alert("success");
+            alert("successful payment");
             window.localStorage.removeItem('money');
-
             window.location.href="customer.html#order";
           })
           .catch(function(error) {
