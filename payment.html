@@ -91,6 +91,7 @@ function phoneAuth() {
         console.log(coderesult);
         alert("Message sent");
     }).catch(function (error) {
+        grecaptcha.reset(window.recaptchaWidgetId);
         alert(error.message);
     });
     document.getElementById("two").style.display="block";
