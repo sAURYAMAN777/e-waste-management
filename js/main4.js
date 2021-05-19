@@ -12,18 +12,19 @@ var config = {
    var i=0;
    var user= firebase.auth().currentUser;
    console.log(user);
-   var hjcordiref= firebase.database().ref(`${sessionStorage.getItem("uids")}`);
+   var hjcordiref= firebase.database().ref("orders/"+`${localStorage.getItem("uids")}`);
     hjcordiref.orderByChild('title').on("child_added", function(data){
          var newVoke = data.val();
         console.log(data.val());
         if(newVoke.title){
-        var uri=`https://sauryaman777.github.io/e-waste-management/studass.html?uid=${sessionStorage.getItem("uids")}&title=${newVoke.title}`;
+        var uri=`https://sauryaman777.github.io/e-waste-management/studass.html?uid=${localStorage.getItem("uids")}&title=${newVoke.title}`;
         var res=encodeURI(uri);
         var time=newVoke.time;
         if(!time)
         time= new Date();
         var html = "";
-         html +=`<div class="col-lg-4 col-sm-12 mt-4 overlay" style="padding:15px;">
+          if(newVoke.status=="active")
+         {html +=`<div class="col-3 overlay" style="padding:15px;">
           <div class="row">
             <div class="col-6">
               <div class="info" style="display: flex; justify-content: center;align-items: center;flex-direction: column;padding: 9px;">
@@ -37,13 +38,13 @@ var config = {
           </div>
           <div class="row">
             <div class="col-12" style="display: flex;flex-wrap:wrap;align-items:center;justify-center: center;">
-              <center><a href="vieworders.html"><button type="button" class="btn btn-success">View Details<i class="fas fa-angle-right"></i></button></a></center>
+              <center><a href="vieworders.html"><button type="button" class="btn btn-success">View Details&nbsp;<i class="fa fa-angle-right"></i></button></a></center>
             </div>
           </div>
          
 <br>
      </div>
-`
+`}
          document.getElementById("classe").innerHTML += html;
         }
     });

@@ -71,12 +71,12 @@ document.querySelector('#btn-signup').onclick = function(){
         college: city,
         role: interests,
         name: name,
-        email:sessionStorage.getItem("vmkey")
+        email:localStorage.getItem("vmkey")
  }
      kpliref.push(data).then(function() {
             firebase.auth().signOut();
 
-sessionStorage.clear();
+localStorage.clear();
          
         var pq=document.getElementById("loadar");
     pq.style.display="none";
@@ -100,7 +100,7 @@ firebase.auth().onAuthStateChanged(function(user) {
    if(user){
      var user = firebase.auth().currentUser;
        console.log(user.email);
-       sessionStorage.setItem("vmkey",user.email);
+       localStorage.setItem("vmkey",user.email);
       
    } 
     else{

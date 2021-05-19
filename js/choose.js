@@ -3,8 +3,8 @@ firebase.auth().onAuthStateChanged(function(user) {
        console.log(user);
       email=user.email; 
        uid=user.uid;
-       sessionStorage.setItem("emails",email);
-        sessionStorage.setItem("uids",uid);
+       localStorage.setItem("emails",email);
+        localStorage.setItem("uids",uid);
        var cliref = firebase.database().ref('userdata/');
        cliref.orderByChild("email").equalTo(user.email).on("child_added", function(data){
            

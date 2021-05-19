@@ -1,6 +1,7 @@
 document.querySelector("#createroom").onclick = function(){
     var d= new Date();
-let name1,title,address,quantity,phone,remarks="";    
+    var format=d.getDate()+" / "+(d.getMonth()+1)+" / "+d.getFullYear()+" "+(d.getHours())+" : "+(d.getMinutes()+1)+" : "+(d.getSeconds()+1)+" GMT +0530 (Indian Standard Time)";
+let name1,title,address,quantity,phone,remarks="",status="active";    
 vali();
             function vali(){
                 name1 = document.querySelector('#name').value;
@@ -11,7 +12,7 @@ vali();
                 remark = document.querySelector('#remarks').value;
                 if(name1!=null && title!=null && quantity!=null && address!=null && phone!=null){
                 var user = firebase.auth().currentUser;
-         var tgref=firebase.database().ref(`${user.uid}/${document.getElementById("title").value}`);
+         var tgref=firebase.database().ref("orders/"+`${user.uid}/${document.getElementById("title").value}`);
     var data={
         "name":name1,
         "title":title,
@@ -19,10 +20,11 @@ vali();
         "quantity":quantity,
         "phone":phone,
         "remark":remark,
-         "time":d,
+        "time":format,
+        "status":status,
          }
      tgref.set(data).then(function(){
-             window.location.href="customer.html#order";  
+             window.location.href="payment.html";  
     });
   
      }
@@ -38,7 +40,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     else{
          var user = firebase.auth().currentUser;
        console.log(user.email);
-       sessionStorage.setItem("vemkey",user.email);
+       localStorage.setItem("vemkey",user.email);
     }
     
 });
