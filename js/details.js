@@ -40,6 +40,7 @@ var user = firebase.auth().currentUser;
                 <p id="five"><span style="font-weight:700;">Phone: </span>${newVoke.phone}</p>
                 <p id="six"><span style="font-weight:700;">Remark: </span>${newVoke.remark}</p>
                 <p id="seven"><span style="font-weight:700;">Status: </span>${newVoke.status}</p>
+                <p id="eight"><span style="font-weight:700;">Item to sell: </span>${newVoke.item_to_be_sold}</p>
               </div>
               </div>
             </div>
@@ -67,8 +68,10 @@ var user = firebase.auth().currentUser;
         }
     });
     function expand(self){
+      console.log("hey");
       var Id = self.getAttribute("id");
       var fId=Id+"fd";
+      
       if(document.getElementById(Id).className=="fa fa-angle-down")
       {
         document.getElementById(Id).className="fa fa-angle-up";
@@ -83,14 +86,22 @@ var user = firebase.auth().currentUser;
     function cancellation(self) {
       var Id = self.getAttribute("id");
       // var c=document.getElementById(data.key+"fd").childNodes;
-      var pr=confirm("Are you sure you want to cancel?");
+      var db= firebase.database().ref("orders/"+`${localStorage.getItem("uids")}`+"/"+Id).on("child_added",function(data){
+        var newVoke=data.val().status;
+        console.log(newVoke);
+        if(newVoke=="active")
+        {
+          var pr=confirm("Are you sure you want to cancel?");
       if(pr)
-      {
-        var db= firebase.database();
-        db.ref("orders/"+`${localStorage.getItem("uids")}`+"/"+Id+"/"+"status").set("cancelled");
-        
+      {  
+        db= firebase.database().ref("orders/"+`${localStorage.getItem("uids")}`+"/"+Id+"/"+"status").set("cancelled");
         alert("Your order has been cancelled.\nAny payment made regarding this order will be refunded within 24 hours");  
       }
+        }
+        else
+        alert("this order is no longer active");
+      });
+      
     }
     
     document.getElementById("log").addEventListener("click",logo);

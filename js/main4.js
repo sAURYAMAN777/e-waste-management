@@ -50,12 +50,12 @@ var config = {
     });
 
 var us=document.getElementById("user");
-document.getElementById("create").addEventListener("click",cretef);
-function cretef(){
+// document.getElementById("create").addEventListener("click",cretef);
+// function cretef(){
    
-    window.open('createorder.html','_self');
+//     window.open('createorder.html','_self');
 
-}
+// }
 
 document.getElementById("log").addEventListener("click",logo);
 function logo(){

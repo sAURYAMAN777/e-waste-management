@@ -11,7 +11,151 @@
      <link rel="stylesheet" href="bootstrap/bootstrap-social/bootstrap-social.css">
    <link rel="stylesheet" type="text/css" href="css/style.css">
             
+<style>
+  body {
+    background-color:aquamarine;
+    font-family: hel;
+}
+            /*--------------------------------------------------------------
+# Counts
+--------------------------------------------------------------*/
 
+.counts .count-box {
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  background: #fff;
+}
+
+.counts .count-box i {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  background: #1acc8d;
+  padding: 12px;
+  color: #fff;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.counts .count-box span {
+  font-size: 36px;
+  display: block;
+  font-weight: 600;
+  color: #010483;
+}
+
+.counts .count-box p {
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #1acc8d;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.back-to-top i {
+  font-size: 28px;
+  color: #fff;
+  line-height: 0;
+}
+
+.back-to-top:hover {
+  background: #2be4a2;
+  color: #fff;
+}
+
+.back-to-top.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.back-to-topq {
+  position: fixed;
+  right: 15px;
+  bottom: 65px;
+  z-index: 996;
+  background-color: #6c757d;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-topq i {
+  font-size: 28px;
+  color: #000;
+  line-height: 0;
+}
+
+.back-to-topq:hover {
+  background: #2be4a2;
+  color: #000;
+}
+
+.query-bot {
+  background-color: darkblue;
+  transition: 0.3s ease;
+  color: #ebebff;
+  height: 60px;
+  width: 110px;
+  border: none;
+  margin: 40px 10px 20px 10px;
+}
+.query-bot:hover {
+  background-color: crimson;
+}
+.overlay {
+  padding: 13px;
+  background-color:#071DF5;
+  border-radius: 5px;
+  transition: 0.4s ease;
+  margin: 5px 20px;
+}
+.overlay:hover {
+  transform: translateY(-6px);
+  box-shadow:5px 5px 15px 4px rgba(13, 215, 241, 0.8);
+}
+.overlay img {
+  width: 120px;
+  height: auto;
+  border-radius: 5px;
+}
+.info .ptitle {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  color: #000;
+}
+.info .ptime {
+  color: black;
+  font-size: 0.8em;
+}
+</style>
         </head>
     <body>
 
@@ -30,18 +174,21 @@
       </ul>
       
 <a href="marketplace.html"><button class="btn btn-outline-success" id="join" type="button">Go to Marketplace</button></a>
-        <button class="btn btn-outline-danger" style="margin-left: 65%;" id="log" type="button"><i class="fa fa-power-off"></i> Logout</button>
+<a href="info.html" style="margin: 5px;"><button class="btn btn-outline-primary" id="infor" type="button">Stats &amp;Info</button></a>
+        <button class="btn btn-outline-danger" style="margin-left: 55%;" id="log" type="button"><i class="fa fa-power-off"></i> Logout</button>
 
     </div>
   </div>
 </nav>
         <br>
         <div class="container">
-        <h1>E waste management system</h1>
+        <h4 style="font-family: lem;">All orders for pickups</h4>
             <div id="classe" class="row">
             </div>
         
-        
+            <h4 style="font-family: lem;">Items ordered from marketplace</h4>
+            <div id="classe2" class="row">
+            </div>
         
         </div>
 

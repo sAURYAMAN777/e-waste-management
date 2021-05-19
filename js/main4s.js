@@ -10,21 +10,23 @@ var config = {
    // Initialize Firebase
    firebase.initializeApp(config);
 
-   var i=0;
+   var i="";
    var user= firebase.auth().currentUser;
    console.log(user);
    var hjcordiref= firebase.database().ref("orders/");
-    hjcordiref.orderByChild('title').on("child_added", function(data){
-         
-         var newVoke = data.val();
-        console.log(data.val());
+    hjcordiref.on("child_added", function(data){
+      console.log(data.key);
+      i=data.key;
+         var pathe= firebase.database().ref("orders/"+data.key)
+         pathe.on("child_added",function(data){
 
-        console.log("jchvv");
-        var time=newVoke.time;
-        if(!time)
-        time= new Date();
-        var html = "";
-         html +=`<div class="col-3 overlay" style="padding:15px;">
+
+          var newVoke = data.val();
+          var time=newVoke.time;
+          if(!time)
+          time= new Date();
+          var html = "";
+         html +=`<div class="col-lg-6 col-md-6 col-sm-10 overlay">
           <div class="row">
             <div class="col-6">
               <div class="info" style="display: flex; justify-content: center;align-items: center;flex-direction: column;padding: 9px;">
@@ -37,17 +39,74 @@ var config = {
             </div>
           </div>
           <div class="row">
-            <div class="col-12" style="display: flex;flex-wrap:wrap;align-items:center;justify-center: center;">
-              <center><a href="vieworders.html"><button type="button" class="btn btn-success">View Details&nbsp;<i class="fa fa-angle-right"></i></button></a></center>
+          <div class="col-9">
+            <p>Details <i style="cursor:pointer;" id="${encodeURI(data.key)}" class="fa fa-angle-down" onclick="expand(this);"></i></p>
+            <div id="${encodeURI(data.key)+'fd'}" class="fulldetails" style="display:none;background-color:#bababa;padding: 8px;">
+              <div class="row">  
+              <div class="col-6">
+                <p id="one"><span style="font-weight:700;">Name: </span>${newVoke.name}</p>
+                <p id="two"><span style="font-weight:700;">Title: </span>${newVoke.title}</p>
+                <p id="three"><span style="font-weight:700;">Address: </span>${newVoke.address}</p>
+                <p id="four"><span style="font-weight:700;">Quantity: </span>${newVoke.quantity}</p>
+              </div>
+              <div class="col-6">
+                <p id="five"><span style="font-weight:700;">Phone: </span>${newVoke.phone}</p>
+                <p id="six"><span style="font-weight:700;">Remark: </span>${newVoke.remark}</p>
+                <p id="seven"><span style="font-weight:700;">Status: </span>${newVoke.status}</p>
+                <p id="eight"><span style="font-weight:700;">Item to sell: </span>${newVoke.item_to_be_sold}</p>
+              </div>
+              </div>
             </div>
           </div>
-         <script></script>
+          </div>
+          <div class="row">
+            <div class="col-6 d-flex align-items-center justify-content-center" style="flex-direction: column;">
+            <p style="font-weight:700;">Current status of order</p>
+            <p id="countdown" style="padding:3px 7px;background-color:gold;border-radius:2px;border: 2px solid #000;">${data.val().status}</p>
+            </div>
+            <div class="col-6 d-flex align-items-center justify-content-center">
+                <button type="button" data-id="${i}" id="${data.key}" class="btn btn-outline-success"onclick="confirmation(this,i);">Confirm pickup</button>
+            </div>
+          </div>
+         
 <br>
-     </div>`
+     </div>
+    
+ 
+`
      
-          document.getElementById("classe").innerHTML += html;
-        
+            document.getElementById("classe").innerHTML += html;
+          
+         });
+         
      });
+     function expand(self){
+      var Id = self.getAttribute("id");
+      var fId=Id+"fd";
+      if(document.getElementById(Id).className=="fa fa-angle-down")
+      {
+        document.getElementById(Id).className="fa fa-angle-up";
+        document.getElementById(fId).style.display="block";
+      }
+      else if(document.getElementById(Id).className=="fa fa-angle-up")
+      {
+        document.getElementById(Id).className="fa fa-angle-down";
+        document.getElementById(fId).style.display="none";
+      }
+    }
+    function confirmation(self) {
+      var Id = self.getAttribute("id");
+      var did= self.getAttribute("data-id")
+      // var c=document.getElementById(data.key+"fd").childNodes;
+      console.log(Id);
+      var pr=confirm("Are you sure the pickup is completed?");
+      if(pr)
+      {
+        var db= firebase.database().ref("orders/"+did+"/"+Id+"/"+"status").set("successful");
+        alert("The pickup is now closed");  
+        window.location.href="admin.html";
+      }
+    }
      
 var us=document.getElementById("user");
 us.textContent=localStorage.getItem("emails");

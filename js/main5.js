@@ -1,7 +1,7 @@
 document.querySelector("#createroom").onclick = function(){
     var d= new Date();
     var format=d.getDate()+" / "+(d.getMonth()+1)+" / "+d.getFullYear()+" "+(d.getHours())+" : "+(d.getMinutes()+1)+" : "+(d.getSeconds()+1)+" GMT +0530 (Indian Standard Time)";
-let name1,title,address,quantity,phone,remarks="",status="active";    
+let name1,title,address,quantity="",phone,remark="",status="active",item_sell="";    
 vali();
             function vali(){
                 name1 = document.querySelector('#name').value;
@@ -10,6 +10,7 @@ vali();
                 quantity = document.querySelector('#quantity').value;
                 phone = document.querySelector('#phone').value;
                 remark = document.querySelector('#remarks').value;
+                item_sell= document.querySelector('#desci').value;
                 if(name1!=null && title!=null && quantity!=null && address!=null && phone!=null){
                 var user = firebase.auth().currentUser;
          var tgref=firebase.database().ref("orders/"+`${user.uid}/${document.getElementById("title").value}`);
@@ -21,10 +22,11 @@ vali();
         "phone":phone,
         "remark":remark,
         "time":format,
+        "item_to_be_sold":item_sell,
         "status":status,
          }
      tgref.set(data).then(function(){
-             window.location.href="payment.html";  
+             window.location.href="customer.html#order";  
     });
   
      }

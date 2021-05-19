@@ -1,3 +1,11 @@
+@font-face {
+    src: url(../fonts/fonts/LemonMilk.otf);
+    font-family: lem;
+}
+@font-face {
+    src: url(../fonts/fonts/Helvetica.ttf);
+    font-family: hel;
+}
 body{
 	margin:0;
 	padding: 0;

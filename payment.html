@@ -33,23 +33,28 @@
                 </div>
                 <div class="col-lg-6 col-md-6" style="background-color: #6c757d;padding: 20px;display: flex;flex-direction: column;
                 flex-wrap: wrap;justify-content: center;align-items: center;border-radius: 10px;">
-                    <form onsubmit="return phoneAuth()">
-                        <input type="number" id="debit-no" placeholder="Enter Debit card Number">:<label for="debit-no"> Debit Card Number</label>
-                        <input type="text" id="acc-name" placeholder="Enter name of account holder" >:<label for="acc-name"> Account Holder's Name</label>
-                        <input type="date" id="expiry" >:<label for="expiry">The expiry date of debit card</label>
-                        <input type="number" id="cvv" placeholder="Enter CVV" >:<label for="cvv">CVV</label>
-                        <input type="text" id="number" placeholder="+91**********" required>:<label for="ph">Valid Phone Number</label>
+                    <form onsubmit="submitPhoneNumberAuth()">
+                        <input type="number" id="debit-no" placeholder="Enter Debit card Number" required>:<label for="debit-no"> Debit Card Number</label>
+                        <input type="text" id="acc-name" placeholder="Enter name of account holder" required>:<label for="acc-name"> Account Holder's Name</label>
+                        <input type="date" id="expiry" required>:<label for="expiry">The expiry date of debit card</label>
+                        <input type="number" id="cvv" placeholder="Enter CVV" required>:<label for="cvv">CVV</label>
+                        <input type="tel" id="phoneNumber" required>:<label for="phoneNumber">Valid Phone Number</label>
+                        <!-- Add a container for reCaptcha -->
                         <div id="recaptcha-container"></div>
-                        <center><button type="submit" id="opt-btn" class="btn btn-success">Get OTP</button></center>
+                        <center><button type="submit" id="sign-in-button">
+                            GET OTP
+                          </button></center>
                     </form>
                     <div class="amount" style="padding: 10px 10px 7px 10px;background-color: antiquewhite;border-radius: 5px;margin-bottom: 6px;">
                         <p style="font-family: hel;font-weight: 600;">Money to be withdrawn :&nbsp;<span id="amt"></span></p>
                     </div>
                     
-                    <form id="two" style="display:none;">
+                    <form id="two">
                         <p>Enter verification code</p>
-                        <input type="text" id="verificationCode" required>:<label for="verificationCode"> Enter verification code</label>
-                        <button type="" onclick="codeverify();" class="btn btn-primary">Verify</button>
+                        <input type="text" id="code" />:<label for="code"> Enter verification code</label>
+                        <button id="confirm-code" onclick="submitPhoneNumberAuthCode()">
+                            ENTER CODE
+                          </button>
                     </form>
                 </div>
                 <div class="col-lg-3 col-md-3">
@@ -61,52 +66,95 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/purecounter/purecounter.js"></script>
     <script src="vendor/glightbox/js/glightbox.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="js/config.js"></script>
-    <script>
-        var money=0;
-        if(localStorage.money)
-        money=localStorage.money;
-        document.getElementById("amt").innerHTML=money;
-        window.onload=function () {
-  render();
-};
-function render() {
-    window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container');
-    recaptchaVerifier.render();
-}
-function phoneAuth() {
-    //get the number
-    var number=document.getElementById('number').value;
-    //phone number authentication function of firebase
-    //it takes two parameter first one is number,,,second one is recaptcha
-    firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier).then(function (confirmationResult) {
-        //s is in lowercase
-        window.confirmationResult=confirmationResult;
-        coderesult=confirmationResult;
-        console.log(coderesult);
-        alert("Message sent");
-    }).catch(function (error) {
-        grecaptcha.reset(window.recaptchaWidgetId);
-        alert(error.message);
-    });
-    document.getElementById("two").style.display="block";
-}
-function codeverify() {
-    var code=document.getElementById('verificationCode').value;
-    coderesult.confirm(code).then(function (result) {
-        alert("Successfully registered");
-        localStorage.setItem('money',0);
-        var user=result.user;
-        console.log(user);
-    }).catch(function (error) {
-        alert(error.message);
-    });
-}
-    </script>
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCBn6ujoGSflOXlCpoOapFINs1JvuF4mX8",
+    authDomain: "otp-verify-d94d5.firebaseapp.com",
+    projectId: "otp-verify-d94d5",
+    storageBucket: "otp-verify-d94d5.appspot.com",
+    messagingSenderId: "340781756521",
+    appId: "1:340781756521:web:987dd479a5a7dd30f132f8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+// Create a Recaptcha verifier instance globally
+      // Calls submitPhoneNumberAuth() when the captcha is verified
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: function(response) {
+            submitPhoneNumberAuth();
+          }
+        }
+      );
+
+      // This function runs when the 'sign-in-button' is clicked
+      // Takes the value from the 'phoneNumber' input and sends SMS to that phone number
+      function submitPhoneNumberAuth() {
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var appVerifier = window.recaptchaVerifier;
+        firebase
+          .auth()
+          .signInWithPhoneNumber(phoneNumber, appVerifier)
+          .then(function(confirmationResult) {
+            window.confirmationResult = confirmationResult;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+
+      // This function runs when the 'confirm-code' button is clicked
+      // Takes the value from the 'code' input and submits the code to verify the phone number
+      // Return a user object if the authentication was successful, and auth is complete
+      function submitPhoneNumberAuthCode() {
+        var code = document.getElementById("code").value;
+        confirmationResult
+          .confirm(code)
+          .then(function(result) {
+            var user = result.user;
+            console.log(user);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+
+      //This function runs everytime the auth state changes. Use to verify if the user is logged in
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log("USER LOGGED IN");
+        } else {
+          // No user is signed in.
+          console.log("USER NOT LOGGED IN");
+        }
+      });
+</script>
+
+    
 	</body>
 </html>
+
+
+    
+    
+
+    
+    
+
+    
+

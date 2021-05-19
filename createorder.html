@@ -17,6 +17,8 @@
 				<form>
 					<h3>Make Your Order</h3>
 					<p>Please fill up the details carefully and correctly so that we can make your work easier</p>
+					<p style="color: black;"><span style="font-weight: 600;">Note :</span>Apart from general garbage cleaning,
+					if you have any older items to sell you will get paid for it. The payment amount will be decided when our employees do the pickup</p>
 					<label class="form-group">
 						<input id="name" type="text" class="form-control"  required>
 						<span>Your Name</span>
@@ -32,9 +34,26 @@
 						<span for="">Address</span>
 						<span class="border"></span>
 					</label>
+
 					<label class="form-group">
-						<input id="quantity" type="text" class="form-control"  required>
+						<p>Choose the service that you want</p>
+						<input type="checkbox" id="yes" name="choice" value="yes" onclick="myFunction1()">
+						<label for="yes">Garbage cleaning</label><br>
+						<input type="checkbox" id="no" name="choice" value="no" onclick="myFunction2()">
+						<label for="no">Sell old item</label><br>
+						<span></span>
+						<span class="border"></span>
+					</label>
+
+					<label class="form-group" style="display: none;" id="quan">
+						<input id="quantity" type="text" class="form-control">
 						<span for="">Quantity of garbage in kg</span>
+						<span class="border"></span>
+					</label>
+					
+					<label class="form-group"style="display: none;" id="desc">
+						<input type="text" id="desci" class="form-control">
+						<span for="">Describe the item you want to sell</span>
 						<span class="border"></span>
 					</label>
 					<label class="form-group">
@@ -63,5 +82,31 @@
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="js/config.js"></script>
 	<script src="js/main5.js"></script>
+	<script>
+		function myFunction1() {
+  // Get the checkbox
+  var checkBox = document.getElementById("yes");
+  // Get the output text
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    document.getElementById("quan").style.display = "block";
+  } else {
+    document.getElementById("quan").style.display = "none";
+  }
+}
+function myFunction2() {
+  // Get the checkbox
+  var checkBox = document.getElementById("no");
+  // Get the output text
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    document.getElementById("desc").style.display = "block";
+  } else {
+    document.getElementById("desc").style.display = "none";
+  }
+}
+</script>
 	</body>
 </html>
