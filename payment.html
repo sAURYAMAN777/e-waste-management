@@ -53,10 +53,11 @@
                     <form id="two">
                         <p>Enter verification code</p>
                         <input type="text" id="code" />:<label for="code"> Enter verification code</label>
-                        <button id="confirm-code" onclick="submitPhoneNumberAuthCode()">
-                            ENTER CODE
-                          </button>
+                        
                     </form>
+                    <button id="confirm-code" onclick="submitPhoneNumberAuthCode()">
+                      ENTER CODE
+                    </button>
                 </div>
                 <div class="col-lg-3 col-md-3">
                 </div>
@@ -90,7 +91,10 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
+ var money=0;
+ if(localStorage.money)
+ money=localStorage.money;
+ document.getElementById("amt").innerHTML=money;
 // Create a Recaptcha verifier instance globally
       // Calls submitPhoneNumberAuth() when the captcha is verified
       window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -129,6 +133,10 @@
           .then(function(result) {
             var user = result.user;
             console.log(user);
+            alert("success");
+            window.localStorage.removeItem('money');
+
+            window.location.href="customer.html#order";
           })
           .catch(function(error) {
             console.log(error);
