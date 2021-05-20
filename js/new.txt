@@ -1,0 +1,40 @@
+if(newVoke.item_to_be_sold)
+        {
+        var html = "";
+        html +=`
+         <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+         <article class="entry">
+
+           <div class="entry-img">
+             <img src="images/e-waste-management.jpg" alt="" class="img-fluid">
+           </div>
+
+           <h2 class="entry-title">
+             ${newVoke.item_to_be_sold}
+           </h2>
+
+           <div class="entry-meta">
+             <ul>
+               <li class="d-flex align-items-center"><i class="icofont-user"></i>${newVoke.name}</li>
+               <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i><time>${newVoke.time}</time></a></li>
+             </ul>
+           </div>
+
+           <div class="entry-content">
+              <p>
+               ${newVoke.description}
+             </p>
+             <div id="buy" class="read-more">
+             <span id="" style="padding: 6px;background-color:#FF4500;cursor:pointer;">
+               Buy Now
+             </span>
+             </div>
+             <center><button style="display:none;" type="button" id="${data.key}" class="btn btn-danger"onclick="cancellation(this);">Delete</button></center>
+           </div>
+
+         </article><!-- End blog entry -->
+       </div>
+`
+
+          document.getElementById("classe").innerHTML += html;
+        }

@@ -17,6 +17,7 @@ vali();
          var tgref=firebase.database().ref("orders/"+`${user.uid}/${document.getElementById("title").value}`);
     var data={
         "name":name1,
+        "email":localStorage.emails,
         "title":title,
         "address":address,
         "quantity":quantity,
@@ -29,7 +30,7 @@ vali();
          }
      tgref.set(data).then(function(){
         var cliref1 = firebase.database().ref('userdata/');
-        var cliref2 = firebase.database().ref('orders/'+`${localStorage.uids}`);
+        
         cliref1.on("child_added",function(snapshot) {
           if(snapshot.val().email==localStorage.emails)
           {
@@ -43,10 +44,11 @@ vali();
                 alert("You dont have to pay since you have subscribed to our premium plan");
                 window.location.href="customer.html#order";
             }
-            else if(!(cliref2.hasChildren()))
+            else if(!(localStorage.check))
             {
                 alert("You dont have to pay since the first pickup is free");
-                window.location.href="customer.html#order";
+                localStorage.setItem('check',1);
+                // window.location.href="customer.html#order";
             }
             else {
                 localStorage.setItem('money',200);
@@ -60,6 +62,17 @@ vali();
   
      }
     }
+}
+function check(){
+    var ref = firebase.database().ref("orders/"+`${localStorage.uids}`);
+    var hasName=0;
+ref.on("child_added",function(data) {
+    console.log(data.val());
+    if(data)
+    hasName=1;
+  });
+  console.log(hasName);
+  return hasName;
 }
 firebase.auth().onAuthStateChanged(function(user) {
  
